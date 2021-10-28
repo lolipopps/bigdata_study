@@ -15,6 +15,7 @@
     <modules>
         <module>HBase</module>
         <module>Hadoop</module>
+        <module>DataStruct</module>
     </modules>
 <dependencies>
     <dependency>
