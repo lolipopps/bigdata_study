@@ -1,12 +1,17 @@
 package com.bigdata.struct.array;
 
+import java.util.*;
+
 public class SearchNums {
 
     public static void main(String[] args) {
-        int[] nums = {4, 3, 2, 1, 4};
+        int[] nums = {-1, 0, 1, 2, -1, -4};
         int target = 0;
-        System.out.println(maxArea(nums));
-
+//        System.out.println(maxArea(nums));
+        System.out.println(threeSum(nums, 0));
+        System.out.println(maxSubArray(nums));
+        System.out.println(dpMaxSubArray1(nums));
+        System.out.println(dpMaxSubArray(nums));
     }
 
 
@@ -40,6 +45,7 @@ public class SearchNums {
 
     /**
      * 双指针移动法 控制一个变量的思想 宽度 最大尽量不要动 ，动 最短的
+     *
      * @param height
      * @return
      */
@@ -57,8 +63,103 @@ public class SearchNums {
             }
         }
         return ans;
+    }
 
+    /**
+     * 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？
+     * 请你找出所有和为 0 且不重复的三元组。
+     * nums = [-1,0,1,2,-1,-4]
+     * [[-1,-1,2],[-1,0,1]]
+     */
+    public static List<List<Integer>> threeSum(int[] nums, int target) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if (nums == null || nums.length < 3) {
+            return res;
+        }
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (nums[i] > 0) {
+                return res;
+            }
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            int l = i + 1;
+            int r = nums.length - 1;
+            while (l < r) {
+                if (nums[l] + nums[r] + nums[i] == 0) {
+                    ArrayList<Integer> tmp = new ArrayList<Integer>();
+                    tmp.add(nums[i]);
+                    tmp.add(nums[l]);
+                    tmp.add(nums[r]);
+                    res.add(tmp);
+                    l++;
+                    r--;
+                    // 剔除相同的元素
+                    while (l < r && nums[l] == nums[l - 1]) l++;
+                    while (l < r && nums[r] == nums[r + 1]) r--;
+                } else if (nums[l] + nums[r] + nums[i] > 0) {
+                    r--;
+                } else {
+                    l++;
+                }
+            }
+
+        }
+        return res;
+    }
+
+    public boolean containsDuplicate(int[] nums) {
+        HashSet<Integer> numSet = new HashSet();
+        for (int num : nums) {
+            if (numSet.contains(num)) {
+                return true;
+            } else {
+                numSet.add(num);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+     *
+     * @param nums
+     * @return
+     */
+    public static int maxSubArray(int[] nums) {
+        int pre = 0, res = nums[0];
+        for (int x : nums) {
+            // 之前和当前值相加 和当前之对比 当前指针所指元素之前的和 小于 0 则丢弃之前的数列  巧妙的应用 小于零相加
+            pre = Math.max(pre + x, x);
+            // 当前值与最大值比较
+            res = Math.max(res, pre);
+        }
+        return res;
 
     }
 
+    public static int dpMaxSubArray(int[] nums) {
+        int pre = 0, res = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i - 1] > 0) {
+                nums[i] = nums[i - 1] + nums[i];
+            }
+        }
+        return Arrays.stream(nums).max().getAsInt();
+
+    }
+
+    public static int dpMaxSubArray1(int[] nums) {
+        int pre = nums[0];
+        int res = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (pre < 0) {
+                pre = nums[i];
+            } else {
+                pre = pre + nums[i];
+                res = Math.max(pre, res);
+            }
+        }
+        return res;
+
+    }
 }
