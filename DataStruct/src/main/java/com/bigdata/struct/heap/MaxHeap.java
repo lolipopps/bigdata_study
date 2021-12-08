@@ -13,7 +13,6 @@ public class MaxHeap {
     // 将数组转换成最大堆
     private void buildHeap() {
         // 完全二叉树只有数组下标小于或等于 (data.length) / 2 - 1 的元素有孩子结点，遍历这些结点。
-        // *比如上面的图中，数组有10个元素， (data.length) / 2 - 1的值为4，a[4]有孩子结点，但a[5]没有*
         for (int i = (data.length) / 2 - 1; i >= 0; i--) {
             // 对有孩子结点的元素heapify
             heapify(i);
@@ -29,16 +28,19 @@ public class MaxHeap {
         int smallest = i;
 
         // 存在左结点，且左结点的值小于根结点的值
-        if (l < data.length && data[l] < data[i])
+        if (l < data.length && data[l] < data[i]) {
             smallest = l;
+        }
 
         // 存在右结点，且右结点的值小于以上比较的较小值
-        if (r < data.length && data[r] < data[smallest])
+        if (r < data.length && data[r] < data[smallest]) {
             smallest = r;
+        }
 
         // 左右结点的值都大于根节点，直接return，不做任何操作
-        if (i == smallest)
+        if (i == smallest) {
             return;
+        }
 
         // 交换根节点和左右结点中最小的那个值，把根节点的值替换下去
         swap(i, smallest);
@@ -73,6 +75,13 @@ public class MaxHeap {
     public void setRoot(int root) {
         data[0] = root;
         heapify(0);
+    }
+
+    public static void main(String[] args) {
+        int[] data = {3,5,7,15,-1,0,23};
+        MaxHeap maxHeap = new MaxHeap(data);
+        maxHeap.setRoot(2);
+        System.out.println(maxHeap.getRoot());
     }
 }
 
