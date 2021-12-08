@@ -72,15 +72,22 @@ SET parquet.compression = snappy;
 SET hive.exec.dynamic.partition.mode = nonstrict;
 SET hive.exec.dynamic.partition = true;
 ```
+select * 
+from a
+left b
+on a.id = b.id and b.pt = '2012103000000' 
 
 8. 谓词下推
 
-   1、对于Join(Inner Join)、Full outer Join，条件写在on后面，还是where后面，性能上面没有区别；
+   1、对于Join(Inner Join) 会下推
    
-   2、对于Left outer Join ，右侧的表写在on后面、左侧的表写在where后面，性能上有提高；
+   2、对于Left outer Join, 右侧的表写在on后面、左侧的表写在where后面，性能上有提高；
    
-   3、对于Right outer Join，左侧的表写在on后面、右侧的表写在where后面，性能上有提高；
+   3、对于Right outer Join, 左侧的表写在on后面、右侧的表写在where后面，性能上有提高；
+
+   4、对于Full outer Join,条件写在on后面，还是where后面，性能上面没有区别；
    
-   4、当条件分散在两个表时，谓词下推可按上述结论2和3自由组合，情况如下：
-   
+   5、不确定因素不会走谓词下推
+
+
  

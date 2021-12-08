@@ -17,6 +17,9 @@
         <module>Hadoop</module>
         <module>DataStruct</module>
         <module>Hive</module>
+        <module>Flink</module>
+        <module>Utils</module>
+        <module>Kafka</module>
     </modules>
 <dependencies>
     <dependency>
