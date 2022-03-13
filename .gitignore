@@ -10,3 +10,5 @@ gen
 .gitignore
 **/target
 logs
+Font/node_modules
+Font/tests
