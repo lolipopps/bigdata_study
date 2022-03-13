@@ -25,7 +25,7 @@
         <module>Flink</module>
         <module>Utils</module>
         <module>Kafka</module>
-        <module>back</module>
+        <module>Back</module>
     </modules>
     <dependencies>
 
