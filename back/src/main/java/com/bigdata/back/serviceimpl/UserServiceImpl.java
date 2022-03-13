@@ -70,12 +70,9 @@ public class UserServiceImpl implements UserService {
                 Path<String> nicknameField = root.get("nickname");
                 Path<String> mobileField = root.get("mobile");
                 Path<String> emailField = root.get("email");
-                Path<String> departmentIdField = root.get("departmentId");
                 Path<String> sexField = root.get("sex");
                 Path<Date> createTimeField = root.get("createTime");
-
                 List<Predicate> list = new ArrayList<>();
-
                 if (StrUtil.isNotBlank(user.getId())) {
                     list.add(cb.equal(idField, user.getId()));
                 }
@@ -93,21 +90,16 @@ public class UserServiceImpl implements UserService {
                 if (StrUtil.isNotBlank(user.getEmail())) {
                     list.add(cb.like(emailField, '%' + user.getEmail() + '%'));
                 }
-
-
                 // 性别
                 if (StrUtil.isNotBlank(user.getSex())) {
                     list.add(cb.equal(sexField, user.getSex()));
                 }
-
                 // 创建时间
                 if (StrUtil.isNotBlank(searchVo.getStartDate()) && StrUtil.isNotBlank(searchVo.getEndDate())) {
                     Date start = DateUtil.parse(searchVo.getStartDate());
                     Date end = DateUtil.parse(searchVo.getEndDate());
                     list.add(cb.between(createTimeField, start, DateUtil.endOfDay(end)));
                 }
-
-
                 Predicate[] arr = new Predicate[list.size()];
                 cq.where(list.toArray(arr));
                 return null;
@@ -115,15 +107,7 @@ public class UserServiceImpl implements UserService {
         }, pageable);
     }
 
-    @Override
-    public List<User> findByDepartmentId(String departmentId) {
 
-        return userDao.findByDepartmentId(departmentId);
-    }
 
-    @Override
-    public void updateDepartmentTitle(String departmentId, String departmentTitle) {
 
-        userDao.updateDepartmentTitle(departmentId, departmentTitle);
-    }
 }

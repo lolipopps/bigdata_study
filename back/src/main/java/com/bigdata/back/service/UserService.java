@@ -47,17 +47,6 @@ public interface UserService extends BaseService<User, String> {
      */
     Page<User> findByCondition(User user, SearchVo searchVo, Pageable pageable);
 
-    /**
-     * 通过部门id获取
-     * @param departmentId
-     * @return
-     */
-    List<User> findByDepartmentId(String departmentId);
 
-    /**
-     * 更新部门名称
-     * @param departmentId
-     * @param departmentTitle
-     */
-    void updateDepartmentTitle(String departmentId, String departmentTitle);
+
 }

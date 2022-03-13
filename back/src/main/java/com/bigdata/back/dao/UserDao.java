@@ -34,19 +34,5 @@ public interface UserDao extends BaseDao<User, String> {
      */
     User findByEmail(String email);
 
-    /**
-     * 通过部门id获取
-     * @param departmentId
-     * @return
-     */
-    List<User> findByDepartmentId(String departmentId);
 
-    /**
-     * 更新部门名称
-     * @param departmentId
-     * @param departmentTitle
-     */
-    @Modifying
-    @Query("update User u set u.departmentTitle=?2 where u.departmentId=?1")
-    void updateDepartmentTitle(String departmentId, String departmentTitle);
 }
