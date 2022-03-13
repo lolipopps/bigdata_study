@@ -31,6 +31,7 @@ public class MyProduce {
             while (true) {
                 String a = DataGenUtil.getString(10);
                 log.info("发送数据: " + a);
+                System.out.println("发送数据: " + a);
                 ProducerRecord record = new ProducerRecord<String, String>(topic, null, null, a);
                 producer.send(record);
                 Thread.sleep(100);
@@ -44,7 +45,7 @@ public class MyProduce {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        MyKafkaProducer p = new MyKafkaProducer("test");
+        MyKafkaProducer p = new MyKafkaProducer("test_11");
         p.run();
     }
 }

@@ -1,5 +1,4 @@
 package com.bigdata.hbase;
-import javafx.util.Pair;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
@@ -9,6 +8,8 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+
 public class HBaseUtils {
     private static Connection connection;
 
@@ -100,11 +101,11 @@ public class HBaseUtils {
      * @param columnFamilyName 列族名
      * @param pairList         列标识和值的集合
      */
-    public static boolean putRow(String tableName, String rowKey, String columnFamilyName, List<Pair<String, String>> pairList) {
+    public static boolean putRow(String tableName, String rowKey, String columnFamilyName, List<Map<String, String>> pairList) {
         try {
             Table table = connection.getTable(TableName.valueOf(tableName));
             Put put = new Put(Bytes.toBytes(rowKey));
-            pairList.forEach(pair -> put.addColumn(Bytes.toBytes(columnFamilyName), Bytes.toBytes(pair.getKey()), Bytes.toBytes(pair.getValue())));
+            pairList.forEach(pair -> put.addColumn(Bytes.toBytes(columnFamilyName), Bytes.toBytes(rowKey), Bytes.toBytes(pair.get(rowKey))));
             table.put(put);
             table.close();
         } catch (IOException e) {

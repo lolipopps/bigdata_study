@@ -18,14 +18,15 @@ public class MyConsumer {
         KafkaConsumer consumer = new KafkaConsumer<String, String>(props);
         consumer.subscribe(Arrays.asList(topic));
         System.out.println("---------开始消费---------");
+
         while (true) {
             int messageNo = 1;
-            ConsumerRecords<String, String> msgList = consumer.poll(100000);
             try {
+                ConsumerRecords<String, String> msgList = consumer.poll(100000);
                 if (null != msgList && msgList.count() > 0) {
                     for (ConsumerRecord<String, String> record : msgList) {
                         //消费100条就打印 ,但打印的数据不一定是这个规律的
-                        System.out.println("---------开始消费---------： " + messageNo);
+                        System.out.println("---------开始消费---------： " + record.value());
                         if (messageNo % 2 == 0) {
                             System.out.println(messageNo + "=======receive: key = " + record.key() + ", value = " + record.value() + " offset===" + record.offset());
                         }
@@ -40,15 +41,11 @@ public class MyConsumer {
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            } finally {
-                consumer.close();
-
             }
-
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
-        readFromKafka("test");
+        readFromKafka("canal");
     }
 }
