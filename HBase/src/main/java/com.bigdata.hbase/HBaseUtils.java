@@ -17,7 +17,7 @@ public class HBaseUtils {
         Configuration configuration = HBaseConfiguration.create();
         configuration.set("hbase.zookeeper.property.clientPort", "2181");
         // 如果是集群 则主机名用逗号分隔
-        configuration.set("hbase.zookeeper.quorum", "47.100.71.215");
+        configuration.set("hbase.zookeeper.quorum", "172.18.1.11");
         try {
             connection = ConnectionFactory.createConnection(configuration);
         } catch (IOException e) {
