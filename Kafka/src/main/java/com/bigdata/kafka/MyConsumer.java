@@ -46,6 +46,6 @@ public class MyConsumer {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        readFromKafka("canal");
+        readFromKafka("order_cnt");
     }
 }

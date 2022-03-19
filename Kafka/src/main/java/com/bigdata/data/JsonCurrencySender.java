@@ -24,7 +24,7 @@ public class JsonCurrencySender {
     private static final Map<String, Integer> currency2rates = initCurrency2rates();
     private static final Map<String, String> country2currency = initCountry2Currency();
 
-    public static void sendMessage(Properties kafkaProperties, int continueMinutes) throws InterruptedException, JsonProcessingException {
+    public static void sendMessage(Properties kafkaProperties, int continueMinutes) throws InterruptedException, JsonProcessingException, com.starrocks.shade.com.fasterxml.jackson.core.JsonProcessingException {
         KafkaProducer<Object, Object> producer = new KafkaProducer<>(kafkaProperties);
         //update currency per 30 seconds
         for (int i = 0; i < (continueMinutes * 60 / 30); i++) {

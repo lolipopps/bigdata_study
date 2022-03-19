@@ -43,7 +43,7 @@ public class JsonOrderSender {
             Date date = new Date(time);
             String jsonSchemaDate = dateFormat.format(date);
             map.put("order_time", jsonSchemaDate);
-            map.put("ts_time", time);
+            map.put("proc_time", time);
             producer.send(new ProducerRecord<>(
                             topicName,
                             String.valueOf(time),

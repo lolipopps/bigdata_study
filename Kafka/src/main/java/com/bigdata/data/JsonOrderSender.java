@@ -28,7 +28,7 @@ public class JsonOrderSender {
     private static final List<String> currencies = initCurrencies();
     private static final List<String> itemNames = initItemNames();
 
-    public static synchronized void sendMessage(Properties kafkaProperties, int continueMinutes) throws InterruptedException, JsonProcessingException {
+    public static synchronized void sendMessage(Properties kafkaProperties, int continueMinutes) throws InterruptedException, JsonProcessingException, com.starrocks.shade.com.fasterxml.jackson.core.JsonProcessingException {
         KafkaProducer<Object, Object> producer = new KafkaProducer<>(kafkaProperties);
         // order stream
         for (int i = 0; i < continueMinutes * 60; i++) {

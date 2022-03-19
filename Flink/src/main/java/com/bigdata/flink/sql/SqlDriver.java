@@ -53,8 +53,8 @@ public class SqlDriver {
                 ")";
         tableEnvironment.sqlUpdate(sinkTableDDL);
 
-        String querySQL = "SELECT  TUMBLE_END(order_time,INTERVAL '10' SECOND) \n" +
-                "       ,item \n" +
+        String querySQL = "insert into order_cnt " +
+                "SELECT  item \n" +
                 "       ,COUNT(order_id)                AS order_cnt \n" +
                 "       ,CAST(SUM(amount_kg) AS BIGINT) AS total_quality\n" +
                 "FROM orders\n" +
