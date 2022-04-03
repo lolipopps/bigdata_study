@@ -38,6 +38,13 @@ public class ResultUtil<T> {
         return this.result;
     }
 
+    public Result<T> setData(Integer code,T t, String msg) {
+        this.result.setResult(t);
+        this.result.setCode(200);
+        this.result.setMessage(msg);
+        return this.result;
+    }
+
     public Result<T> setErrorMsg(String msg) {
         this.result.setSuccess(false);
         this.result.setMessage(msg);
@@ -54,6 +61,10 @@ public class ResultUtil<T> {
 
     public static <T> Result<T> data(T t) {
         return new ResultUtil<T>().setData(t);
+    }
+
+    public static <T> Result<T> data(Integer code,T t, String msg) {
+        return new ResultUtil<T>().setData(code,t, msg);
     }
 
     public static <T> Result<T> data(T t, String msg) {

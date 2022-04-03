@@ -38,6 +38,8 @@ public class DorisSql {
                 "  'format.type' = 'json',\n" +
                 "  'format.derive-schema' = 'true'\n" +
                 ")\n";
+
+
         String orderSinkTableDDL = "CREATE TABLE doris_orders (\n" +
                 "  order_id STRING,\n" +
                 "  item    STRING,\n" +
@@ -48,22 +50,19 @@ public class DorisSql {
                 ") WITH (\n" +
                 " 'connector'='starrocks',\n" +
                 "   'load-url'='172.18.1.60:8030',\n" +
-                "   'jdbc-url'='jdbc:mysql://172.18.1.60:9030/demo',\n" +
+                "   'jdbc-url'='jdbc:mysql://172.18.1.60:9030',\n" +
                 "   'database-name'='demo',\n" +
-                "   'table-name'='orders'," +
+                "   'table-name'='orders_update'," +
                 "   'username' = 'root',\n" +
+                "   'sink.buffer-flush.interval-ms' = '5000'," +
                 "   'password' = 'hu1234tai'\n" +
                 " )\n";
         String querySQL = "insert into doris_orders " +
                 "SELECT  order_id,item,order_time,amount,currency,proc_time \n" +
                 "FROM doris_kafka_orders";
-        String querySQL1 = "SELECT  order_id,item,order_time,amount,currency,proc_time \n" +
-                "FROM doris_kafka_orders";
         tableEnvironment.sqlUpdate(orderTableDDL);
         tableEnvironment.sqlUpdate(orderSinkTableDDL);
-        tableEnvironment.sqlUpdate(querySQL);
-        tableEnvironment.executeSql(querySQL1).print();
-        tableEnvironment.execute("todoris");
+        tableEnvironment.executeSql(querySQL);
 
     }
 

@@ -26,6 +26,7 @@
         <module>Utils</module>
         <module>Kafka</module>
         <module>Back</module>
+        <module>Spider</module>
     </modules>
     <dependencies>
 
