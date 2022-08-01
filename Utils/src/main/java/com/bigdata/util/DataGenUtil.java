@@ -1,10 +1,12 @@
-package com.bigdata.flink.util;
+package com.bigdata.util;
 
+import com.github.javafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 import java.util.UUID;
 
@@ -23,6 +25,9 @@ public class DataGenUtil {
      * @Date: 2019/9/27 21:09
      */
 
+
+    public static Faker fakerWithCN = new Faker(Locale.CHINA);
+    public static Faker fakerWithUS = new Faker(Locale.US);
     static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 

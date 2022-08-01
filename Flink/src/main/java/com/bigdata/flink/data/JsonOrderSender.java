@@ -1,6 +1,7 @@
 package com.bigdata.flink.data;
 
-import com.bigdata.flink.util.DataGenUtil;
+
+import com.bigdata.util.DataGenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
