@@ -17,6 +17,11 @@ server:
   # 优雅停机 关闭容器后默认等待30秒继续执行没处理完的任务 避免数据不一致
   shutdown: graceful
 
+security:
+  user:
+    name: bobo
+    password: xyz
+
 spring:
   # 数据源
   datasource:

@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class OrderDetail extends BaseBean {
+public class OrderDetail implements BaseBean {
 
     final static List<String> statusNames = new ArrayList<>(Arrays.asList("创建", "运输", "下单", "完成", "取消"));
 
@@ -18,7 +18,7 @@ public class OrderDetail extends BaseBean {
     Integer id;
     Date creeateTime;
 
-    public static OrderDetail getData() {
+    public  static OrderDetail genBean() {
         OrderDetail order = new OrderDetail();
         order.setOrderId(DataGenUtil.getRandomNumber(1, 100));
         order.setStatus(statusNames.get(DataGenUtil.getRandomNumber(0, statusNames.size() - 1)));

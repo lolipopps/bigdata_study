@@ -1,6 +1,7 @@
 package com.bigdata.flink.util;
 
 import com.bigdata.flink.config.KafkaConfig;
+import com.bigdata.util.DataGenUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

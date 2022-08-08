@@ -1,7 +1,5 @@
 package com.bigdata.bean;
 
-public class BaseBean {
-
-
+public interface BaseBean {
 
 }
